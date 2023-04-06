@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUserId } from '../redux/result_reducer';
 import { oasetUserId } from '../redux/oaresult_reducer';
+import { mpsetUserId } from '../redux/mpresult_reducer';
+import { masetUserId } from '../redux/maresult_reducer';
+
 const Form1 = () => {
 
     const [emailError, setEmailError] = useState('');
@@ -34,6 +37,8 @@ const Form1 = () => {
         if(inputRef.current?.value){
             dispatch(setUserId(inputRef.current?.value))
             dispatch(oasetUserId(inputRef.current?.value))
+            dispatch(mpsetUserId(inputRef.current?.value))
+            dispatch(masetUserId(inputRef.current?.value))
         }
     }
     return <Col lg='12'>
@@ -47,7 +52,6 @@ const Form1 = () => {
                     </div>
                     <br/>
                     <Link to={'quiz'} className='form1' onClick={startQuiz}>Click Here To Get Started</Link>
-                    
                 </div>
             </Form>
         </div>

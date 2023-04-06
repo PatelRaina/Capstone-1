@@ -1,44 +1,42 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import '../styles/result.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { oaresetAllAction } from '../redux/oaquestion_reducer';
-import { oausePublishResult } from '../hooks/setoaResult';
-import { oaresetResultAction } from '../redux/oaresult_reducer';
-import { attempts_Number } from '../helper/oahelper';
-import { flagResult } from '../helper/oahelper';
+import { mpresetAllAction } from '../redux/mpquestion_reducer';
+import { mpusePublishResult } from '../hooks/setmpResult';
+import { mpresetResultAction } from '../redux/mpresult_reducer';
+import { attempts_Number } from '../helper/mphelper';
+import { flagResult } from '../helper/mphelper';
 import {Bar} from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend} from 'chart.js'
 
-const OaResult = () => {
-   
+const MpResult = () => {
     const dispatch = useDispatch()
-    const {questions:{queue,oanswers},oaresult:{oaresult,userId}}=useSelector(state=>state)
-    
+    const {questions:{queue,mpanswers},mpresult:{mpresult,userId}}=useSelector(mpstate=>mpstate)
     const totalPoints = queue.length * 1;
-    const oaattempts = attempts_Number(oaresult);
+    const mpattempts = attempts_Number(mpresult);
     //const earnPoints= earnPoints_Number(oaresult,oanswers,1);
     const flag= flagResult(totalPoints)
-    const questions = useSelector(state=>state.questions.queue[state.questions.trace])
-    oausePublishResult({
+    const questions = useSelector(mpstate=>mpstate.questions.queue[mpstate.questions.trace])
+    mpusePublishResult({
         email:userId,
-        oaresult,
-        oaattempts, 
-        oabusinessfeasibilitysummary:flag?"Success":"Not Success"
+        mpresult,
+        mpattempts, 
+        mpbusinessfeasibilitysummary:flag?"Success":"Not Success"
         });
-        const count = oaresult.reduce(
-            (oaresult1, curr) => {
-              if (curr === 'Yes') {
-                oaresult1.zeroCount++;
+        const count = mpresult.reduce(
+            (mpresult1, curr) => {
+              if (curr === 0) {
+                mpresult1.zeroCount++;
               } else {
-                oaresult1.oneCount++;
+                mpresult1.oneCount++;
               }
-              return oaresult1;
+              return mpresult1;
             },
             { zeroCount: 0, oneCount: 0 },
           
           );
-   const value=(count.zeroCount/oaresult.length)*100;
+   const value=(count.zeroCount/mpresult.length)*100;
    const percentage = Number((value).toFixed(2));
    console.log(percentage);
     ChartJS.register(
@@ -48,13 +46,13 @@ const OaResult = () => {
         Tooltip,
         Legend 
     )
-    console.log(oaresult);
+    console.log(mpresult);
     const data={
             labels:["Success Ration"],
             datasets:[{
                 label:"Success Ratio",
                 data:[percentage],
-                backgroundColor:'black',
+                backgroundColor:'maroon',
                 borderColor:'balck',
                 borderWidth:1,
                 barPercentage: 0.1,
@@ -65,7 +63,7 @@ const OaResult = () => {
         datasets:[{
             label:"Success Ratio",
             data:[count.zeroCount,count.oneCount],
-            backgroundColor:'black',
+            backgroundColor:'maroon',
             borderColor:'balck',
             borderWidth:1,
             barPercentage: 0.1,
@@ -86,13 +84,13 @@ const OaResult = () => {
             scales: {
                 y: 
                     {
-                        max: 10,
+                        max: 20,
                       },
                   },
             }
     function onRestart(){
-        dispatch(oaresetAllAction())
-        dispatch(oaresetResultAction())
+        dispatch(mpresetAllAction())
+        dispatch(mpresetResultAction())
     }
     return(
         <div className='container'>
@@ -101,18 +99,18 @@ const OaResult = () => {
             </div>
             {/* <div className='result flex-center'>
                 <div className='flex'>
-                    <span className='text'>User Email ID: </span>
+                    <span className='text'>Email : </span>
                     <span className='text'>{userId || ""}</span>
                 </div>
-               </div> */}
+            </div> */}
            <div className='start'>  
             <Link className='btn1' to={'/'} onClick={onRestart}>Restart</Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <Link className='btn1' to={'/categories'}>Go to next Category</Link>
+            <Link className='btn1' to={'/categories'} >Go to Next Category</Link>
            </div>
            <div className='container'>
            <br/><br/>
-           <h3 className="chart_title">Success Ration for Opportunity Analysis</h3>
-           <h4 className="chart_title">Opportunity Analysis: {percentage}%</h4>
+           <h3 className="chart_title">Success Ration for Marketing Plan</h3>
+           <h4 className="chart_title">Success Ration: {percentage}%</h4>
            <br/>
           
             <div className='chart1'>
@@ -125,4 +123,4 @@ const OaResult = () => {
     )
 }
 
-export default OaResult;
+export default MpResult;

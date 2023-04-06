@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import "./quiz.css";
 import { Navigate } from 'react-router-dom';
+
 import { useFetchQuestion } from '../hooks/FetchQuestion';
 import { MoveNextQuestion, MovePrevQuestion } from '../hooks/FetchQuestion';
 import {PushAnswer, updateResult} from '../hooks/setResult';
 import {useSelector,useDispatch} from 'react-redux';
+
 const Questions1 = ({onChecked}) => {
-
     const[check,  setChecked] = useState(undefined)
-    
-    const [{ isLoading,apiData,serverError}] = useFetchQuestion();
-   // useSelector(state=>console.log(state));
-
+    const [{ isLoading,serverError}] = useFetchQuestion();
     const questions = useSelector(state=>state.questions.queue[state.questions.trace])
     const state = useSelector(state=>state)
     const result = useSelector(state=>state.result.result)
@@ -19,9 +17,8 @@ const Questions1 = ({onChecked}) => {
 
     const dispatch = useDispatch()
     useEffect(()=>{
-        
-      console.log(state);
-       console.log(result)
+        console.log(state);
+        console.log(result)
         dispatch(updateResult({trace,check})) 
     },[check])
 
@@ -30,22 +27,19 @@ const Questions1 = ({onChecked}) => {
         if(trace>0){
             dispatch(MovePrevQuestion())
         }
-        
     }
+    
     function onNext(){
         console.log("On next Click")
         if(trace<queue.length){
             dispatch(MoveNextQuestion())
-
             if(result.length<=trace){
                 dispatch(PushAnswer(check))
             }
         }
-    //setChecked(undefined)
     }
     
     function onChecked(check){
-       // console.log(check);
         setChecked(check)
     }
 
@@ -53,12 +47,9 @@ const Questions1 = ({onChecked}) => {
         return <Navigate to={'/result'} replace="true"></Navigate>
     }
     
-
-    
     function onSelect(i){
-         onChecked(i);
-        
-         setChecked(i);
+        onChecked(i);
+        setChecked(i);
     }
 
     if(isLoading) return <h3 className='text-light'>isLoading</h3>
@@ -70,11 +61,11 @@ const Questions1 = ({onChecked}) => {
             </div>
             <div className='radiobtn'>
             <h2 className='text-light'>{ questions?.question }</h2>
-
-            <ul key={questions?.id}>
+            <ul className='qul' key={questions?.id}>
                 {
                     questions?.options.map((q,i)=>(
-                        <li key={i}>
+                        <li key={i}  className="labelli">
+                        <label className="radio-container">
                         <input 
                             type="radio"
                             value={false}
@@ -83,20 +74,19 @@ const Questions1 = ({onChecked}) => {
                             className="radio"
                             onChange={()=>onSelect(`${q}`)}
                         />
-                        <label className='text' htmlFor={`q${i}-option`}>{q}</label>
+                        <span className="radio-label" htmlFor={`q${i}-option`}>{q}</span>
+                        </label>
                         <div className={`check ${result[trace == i ? 'check' : '']}`}></div>
                         </li>
                     ))
                 }
             </ul>
             <div className='grid'>
-               {trace > 0 ? <button className='btnpre' onClick={onPrev}>Previous</button>:<div></div> }
+                {trace > 0 ? <button className='btnpre' onClick={onPrev}>Previous</button>:<div></div> }
                 <button className='btnnext' onClick={onNext}>Next</button>
             </div>
         </div>
-           </div> 
-        
-    )
-}
+    </div> 
+)}
 
 export default Questions1;

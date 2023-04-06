@@ -7,6 +7,7 @@ import  questionReducer  from './question_reducer';
 import  resultReducer  from './result_reducer';
 import maresultreducer from './maresult_reducer';
 import oaresultreducer from './oaresult_reducer';
+import mpresultreducer from './mpresult_reducer';
 const rootReducer = combineReducers({
     questions : questionReducer,
     questionn : noquestionreducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
     oquestions : oaquestionreducer,
     result : resultReducer,
     maresult: maresultreducer,
-    oaresult: oaresultreducer
+    oaresult: oaresultreducer,
+    mpresult: mpresultreducer
 })
 export default configureStore({ reducer : rootReducer});

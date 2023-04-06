@@ -13,21 +13,21 @@ const ResultTable = () => {
         <table>
             <thead className='table-header'>
                 <tr className='table-row'>
-                   <td>Email</td>
-                    <td>Result</td>
+                   
+                    <td>result</td>
                 </tr>
             </thead>
             <tbody >
                 {!data ?? <div>No Data Found</div>}
                 {
-                    /* <td>Email</td>
+                   /*  <td>Email</td>
                     <td>Attempts</td>
                     <td>Business Feasibility Points</td>
                      <td>Business Feasibility Summary</td> 
                       */
                     data.map((v,i)=>(
                     <tr key={i} className={v?.businessfeasibilitysummary=="Not Success" ? "table-body" : "table-body1"}>
-                    <td>{v?.email || ''}</td>
+                    
                     <td>{v?.result || ''}</td>
                     
                 </tr>

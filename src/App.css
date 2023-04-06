@@ -8,15 +8,14 @@
   --text-color: #6e7074;
   --font-name: "Montserrat", sans-serif;
   --subtitle-font-name: "Island Moments", cursive;
-  
 }
 
- * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: black;
-} 
+}
 
 body {
   font-family: var(--font-name);
@@ -24,15 +23,13 @@ body {
 }
 
 section {
-  padding: 0px 0px;
+  padding: 50px 0px;
 }
-container{
-  padding: 0px 0px;
-}
+
 h1,
 h2,
 h3,
-
+h4,
 h5,
 h6 {
   color: var(--heading-color);

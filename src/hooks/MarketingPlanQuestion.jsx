@@ -1,18 +1,17 @@
 import {useEffect, useState} from "react";
 import { useDispatch } from "react-redux";
-
-import { getServerData } from "../helper/helper";
+import { mpgetServerData } from "../helper/mphelper";
 import * as Action from "../redux/mpquestion_reducer"
 
 
-export const useFetchQuestion=()=>{
+export const mpuseFetchQuestion=()=>{
     const dispatch = useDispatch();
     const [getData,setGetData]= useState({ isLoading: false,apiData:[],serverError:null})
     useEffect(()=>{
         setGetData(prev=>({...prev,isLoading:true}));
         (async ()=>{
             try {
-                const [{mpquestions,mpanswers}]=await getServerData(`${process.env.REACT_APP_SERVER_HOSTNAME}/api/mpquestions`,(data)=>data)
+                const [{mpquestions,mpanswers}]=await mpgetServerData(`${process.env.REACT_APP_SERVER_HOSTNAME}/api/mpquestions`,(data)=>data)
                 console.log({mpquestions,mpanswers});
                 if(mpquestions.length>0){
                     setGetData(prev=>({...prev,isLoading:false}));

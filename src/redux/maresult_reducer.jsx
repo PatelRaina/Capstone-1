@@ -1,30 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
 export const maresultReducer= createSlice({
-    name:'result',
+    name:'maresult',
     initialState:{
         userId:null,
-        result:[],
-        question:[]
+        maresult:[],
+        mquestion:[]
     },
     reducers:{
-        setUserId:(state,action) =>{
+        masetUserId:(state,action) =>{
             state.userId=action.payload
         },
-        pushResultAction : (state,action)=>{
-            state.result.push(action.payload)
+        mapushResultAction : (state,action)=>{
+            state.maresult.push(action.payload)
         },
-        updateResultAction : (state,action)=>{
+        maupdateResultAction : (state,action)=>{
             const {trace, check} = action.payload;
-            state.result.fill(check, trace, trace + 1)
+            state.maresult.fill(check, trace, trace + 1)
         },
-        resetResultAction : () => {
+        maresetResultAction : () => {
             return {
                 userId:null,
-                result:[],
-                question:[]
+                maresult:[],
+                mquestion:[]
             }
         } 
     }
 })
-export const {setUserId, pushResultAction, resetResultAction, updateResultAction}=maresultReducer.actions;
+export const {masetUserId, mapushResultAction, maresetResultAction, maupdateResultAction}=maresultReducer.actions;
 export default maresultReducer.reducer;

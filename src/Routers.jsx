@@ -9,12 +9,14 @@ import Result from './pages/Result';
 import Questions1 from './pages/Questions1';
 import Questions2 from './pages/Questions2';
 import { CheckUserExist } from "./helper/helper";
-import { oaCheckUserExist } from './helper/oahelper';
 import Categories from './pages/Categories';
 import MarketAnalysis from './pages/MarketAnalysis';
+import MarketAnalysis1 from './pages/MarketAnalysis1';
 import OpportunityAnalysis from './pages/OpportunityAnalysis';
 import MarketingPlan from './pages/MarketingPlan';
 import OaResult from './pages/OaResult';
+import MpResult from './pages/MpResult';
+import MaResult from './pages/MaResult';
 const Routers = () => {
     return(
         <Routes>
@@ -27,10 +29,13 @@ const Routers = () => {
             <Route path='/Questions1' element={<Questions1/>}/>
             <Route path='/Questions2' element={<Questions2/>}/>
             <Route path='/marketanalysis' element={<MarketAnalysis/>}/>
+            <Route path='/marketanalysis1' element={<MarketAnalysis1/>}/>
             <Route path='/marketingplan' element={<MarketingPlan/>}/>
             <Route path='/opportunityanalysis' element={<OpportunityAnalysis/>}/>
             <Route path='/categories' element={<Categories/>}/>
             <Route path='/oaresult' element={<OaResult/>}/>
+            <Route path='/mpresult' element={<MpResult/>}/>
+            <Route path='/maresult' element={<MaResult/>}/>
         </Routes>
         
     )

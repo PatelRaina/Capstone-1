@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import "./quiz.css";
-
 import { useFetchQuestion } from '../hooks/FetchNoQuestion';
 import { MoveNextQuestion, MovePrevQuestion } from '../hooks/FetchNoQuestion';
 import {PushAnswer} from '../hooks/setResult';
@@ -10,10 +9,7 @@ const Questions2 = ({onChecked}) => {
 
     const[check, setChecked] = useState(undefined)
     const [{ isLoading,apiData,serverError}] = useFetchQuestion();
-    
-
     const questionn = useSelector(state=>state.questions.queue[state.questionn.trace])
-
     const state = useSelector(state=>state)
     const {queue,trace} = useSelector(state=>state.questions)
     const dispatch = useDispatch()
@@ -21,34 +17,22 @@ const Questions2 = ({onChecked}) => {
         console.log(state)
     })
     function onPrev(){
-        //console.log("On Previous Click")
-        if(trace>0){
+       if(trace>0){
             dispatch(MovePrevQuestion())
         }
-        
     }
     function onNext(){
-        //console.log("On nect Click")
         if(trace<queue.length){
             dispatch(MoveNextQuestion())
             dispatch(PushAnswer(check))
         }
-    
     }
-
     function onChecked(check){
         console.log(check);
         setChecked(check)
     }
-
     useEffect(()=>{
-        //console.log(questions)
-    })
-
-    useEffect(()=>{
-        //console.log(isLoading)
         console.log(apiData)
-        // console.log(serverError)
     })
     function onSelect(i){
          onChecked(i)
@@ -76,7 +60,6 @@ const Questions2 = ({onChecked}) => {
                             onChange={()=>onSelect(i)}
                         />
                         <label className='text' htmlFor={`q${i}-option`}>{q}</label>
-                        
                         </li>
                     ))
                 }
@@ -86,9 +69,7 @@ const Questions2 = ({onChecked}) => {
                 <button className='btnnext' onClick={onNext}>Next</button>
             </div>
         </div>
-           </div> 
-        
-    )
-}
+    </div> 
+)}
 
 export default Questions2   ;

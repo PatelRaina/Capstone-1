@@ -1,46 +1,45 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import '../styles/result.css';
 import ResultTable from './ResultTable';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetAllAction } from '../redux/question_reducer';
-import { usePublishResult } from '../hooks/setResult';
-import { resetResultAction } from '../redux/result_reducer';
-import { attempts_Number } from '../helper/helper';
+import { maresetAllAction } from '../redux/maquestion_reducer';
+import { mausePublishResult } from '../hooks/setmaResult';
+import { maresetResultAction } from '../redux/maresult_reducer';
+import { attempts_Number } from '../helper/mahelper';
+import { flagResult } from '../helper/mahelper';
 import {Bar} from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend} from 'chart.js'
-import {flagResult } from '../helper/helper';
-const Result = () => {
+
+const MaResult = () => {
     const dispatch = useDispatch()
-    const {questions:{queue,answers},result:{result,userId}}=useSelector(state=>state)
-  
+    const {questions:{queue,manswers},maresult:{maresult,userId}}=useSelector(state=>state)
     const totalPoints = queue.length * 1;
-    const attempts = attempts_Number(result);
-    //const earnPoints= earnPoints_Number(result,answers,1);
+    const maattempts = attempts_Number(maresult);
+    //const earnPoints= earnPoints_Number(oaresult,oanswers,1);
     const flag= flagResult(totalPoints)
     const questions = useSelector(state=>state.questions.queue[state.questions.trace])
-    usePublishResult({
+    mausePublishResult({
         email:userId,
-        result,
-        attempts, 
-        businessfeasibilitysummary:flag?"Success":"Not Success",
-        });
-    
-        const count = result.reduce(
-            (result1, curr) => {
-              if (curr === 'Yes') {
-                result1.zeroCount++;
-              } else {
-                result1.oneCount++;
-              }
-              return result1;
-            },
-            { zeroCount: 0, oneCount: 0 },
-          
-          );
-
-          const percentage=(count.zeroCount/result.length)*100;
-   console.log(percentage);
+        maresult,
+        maattempts, 
+        mabusinessfeasibilitysummary:flag?"Success":"Not Success"
+    });
+    const macount = maresult.reduce(
+        (maresult1, curr) => {
+          if (curr === 0) {
+            maresult1.zeroCount++;
+          } else {
+            maresult1.oneCount++;
+          }
+          return maresult1;
+        },
+        { zeroCount: 0, oneCount: 0 },
+      
+      );
+      const mavalue = (macount.zeroCount/maresult.length)*100;
+    const mapercentage=Number((mavalue).toFixed(2));
+    console.log(mapercentage);
     ChartJS.register(
         BarElement, 
         CategoryScale,
@@ -48,29 +47,32 @@ const Result = () => {
         Tooltip,
         Legend 
     )
-    console.log(result);
+
+    console.log(maresult);
     const data={
-        labels:["Success Ration"],
-        datasets:[{
-            label:"Success Ratio",
-            data:[percentage],
-            backgroundColor:'maroon',
-            borderColor:'balck',
-            borderWidth:1,
-            barPercentage: 0.1,
-        }]
+            labels:["Success Ration"],
+            datasets:[{
+                label:"Success Ratio",
+                data:[mapercentage],
+                backgroundColor:'maroon',
+                borderColor:'balck',
+                borderWidth:1,
+                barPercentage: 0.1,
+            }]
     }
+
     const data1={
         labels:["Yes","No"],
         datasets:[{
             label:"Success Ratio",
-            data:[count.zeroCount,count.oneCount],
+            data:[macount.zeroCount,macount.oneCount],
             backgroundColor:'maroon',
             borderColor:'balck',
             borderWidth:1,
             barPercentage: 0.1,
-        }]
-    }
+            
+    }]}
+
     const options={
         scales: {
             y: 
@@ -79,6 +81,7 @@ const Result = () => {
                   },
               },
              
+              
         }
         const options1={
             scales: {
@@ -88,34 +91,34 @@ const Result = () => {
                       },
                   },
             }
-    
+
 
     function onRestart(){
-        dispatch(resetAllAction())
-        dispatch(resetResultAction())
+        dispatch(maresetAllAction())
+        dispatch(maresetResultAction())
     }
     return(
         <div className='container'>
             <div className='container1'>
             <h1 className='title1 text-light'>Your Bussines Plan Summary</h1>
             </div>
-            <div className='result flex-center'>
+            {/* <div className='result flex-center'>
                 <div className='flex'>
-                    <span className='text'>User Email ID:</span>
+                    <span className='text'>User Email ID: </span>
                     <span className='text'>{userId || ""}</span>
                 </div>
-            </div>
+            </div> */}
            <div className='start'>  
             <Link className='btn1' to={'/'} onClick={onRestart}>Restart</Link>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <Link className='btn1' to={'/categories'} >Go to next Category</Link>
+            <Link className='btn1' to={'/categories'}>Go to next Category</Link>
            </div>
            <div className='container'>
            <br/><br/>
-          
-           <h4 className="chart_title">Industry Analysis: {percentage}%</h4>
+           <h3 className="chart_title">Success Ration for Opportunity Analysis</h3>
+           <h4 className="chart_title">Success Ration: {mapercentage}%</h4>
            <br/>
-           
+         
             <div className='chart1'>
             <Bar className='bar'
             data={data1}
@@ -126,4 +129,4 @@ const Result = () => {
     )
 }
 
-export default Result;
+export default MaResult;

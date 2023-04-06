@@ -72,6 +72,7 @@ const OpportunityAnalysis = ({onChecked}) => {
                 {
                     oquestions?.options.map((q,i)=>(
                         <li key={i}>
+                        <label className="radio-container">
                         <input 
                             type="radio"
                             value={false}
@@ -80,7 +81,8 @@ const OpportunityAnalysis = ({onChecked}) => {
                             className="radio"
                             onChange={()=>onSelect(`${q}`)}
                         />
-                        <label className='text' htmlFor={`q${i}-option`}>{q}</label>
+                        <span className="radio-label" htmlFor={`q${i}-option`}>{q}</span>
+                        </label>
                         <div className={`check ${oaresult[trace == i ? 'check' : '']}`}></div>
                         </li>
                     ))

@@ -1,40 +1,61 @@
-.form{
-    color:white;
-    text-align: center;
-    padding-top: 2%;
-}
-.form1{
-    color: red;
-    text-decoration: none;
-    border:solid;
-    border-width: 1px;
-    margin-top: 10px;
-    /* padding: .2em 1.7em; */
-    font-size: 1.2rem;
-    padding: .2em 1.7em;
-}
-.mainForm{
-    text-align: center;
-    width:100%;
-    margin-top:40px;
-    border: solid;
-    border-color: white;
-    padding-bottom: 2%;
-}
-.error{
-    color: red;
-}
-.input{
-    margin-left: 1%;
-    border-color: white;
+.form-bar {
+    background-color: black;
+    padding: 50px;
+    align-items: center;
+    margin-left: 15%;
+  }
+  
+  .mainForm {
+    
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  .form {
+    color: rgb(168, 159, 159);
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    align-items: center;
+  }
+  .form h3{
+    font-size: 5rem;
+  }
+  
+  .label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 24px;
     color: white;
-    height:35px;
-}
-
-.btn{
-    padding: .2em 1.7em;
-   
-    color:white;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .error {
+    color: rgb(133, 6, 6);
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .form1 {
+    background-color: rgb(133, 6, 6);
+    color: white;
+    font-size: 24px;
+    padding: 10px 20px;
+    border-radius: 5px;
     text-decoration: none;
-    background-color: #faff5a;
-}
+  }
+  
+  .form1:hover {
+    background-color: white;
+    color: rgb(133, 6, 6);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  

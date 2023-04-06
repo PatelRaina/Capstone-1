@@ -1,9 +1,7 @@
 import {useEffect, useState} from "react";
 import { useDispatch } from "react-redux";
-
 import { oagetServerData } from "../helper/oahelper";
 import * as Action from "../redux/oaquestion_reducer"
-
 
 export const oauseFetchQuestion=()=>{
     const dispatch = useDispatch();

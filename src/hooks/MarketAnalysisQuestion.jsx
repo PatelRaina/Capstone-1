@@ -1,18 +1,15 @@
 import {useEffect, useState} from "react";
 import { useDispatch } from "react-redux";
-
-import { getServerData } from "../helper/helper";
+import { magetServerData } from "../helper/mahelper";
 import * as Action from "../redux/maquestion_reducer"
-
-
-export const useFetchQuestion=()=>{
+export const mauseFetchQuestion=()=>{
     const dispatch = useDispatch();
     const [getData,setGetData]= useState({ isLoading: false,apiData:[],serverError:null})
     useEffect(()=>{
         setGetData(prev=>({...prev,isLoading:true}));
         (async ()=>{
             try {
-                const [{mquestions,manswers}]=await getServerData(`${process.env.REACT_APP_SERVER_HOSTNAME}/api/maquestions`,(data)=>data)
+                const [{mquestions,manswers}]=await magetServerData(`${process.env.REACT_APP_SERVER_HOSTNAME}/api/maquestions`,(data)=>data)
                 console.log({mquestions,manswers});
                 if(mquestions.length>0){
                     setGetData(prev=>({...prev,isLoading:false}));
